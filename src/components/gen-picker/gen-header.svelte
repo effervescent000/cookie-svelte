@@ -5,4 +5,7 @@
 	export let setVersion: (value: string | number) => void;
 </script>
 
-<button on:click={() => setVersion(versionKey)}>{version}</button>
+<button
+	on:click={() => setVersion(versionKey)}
+	class={selectedVersion === versionKey ? 'underline' : ''}>{version}</button
+>
