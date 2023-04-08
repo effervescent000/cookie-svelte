@@ -15,7 +15,7 @@
 	};
 </script>
 
-<div>
+<div class="flex gap-3">
 	{#each VERSIONS as vrs}
 		<GenHeader
 			version={vrs.name}
@@ -26,7 +26,7 @@
 	{/each}
 </div>
 
-<div>
+<div class="flex gap-3">
 	{#if foundGen}
 		{#each foundGen.children as child}
 			<GenHeader
