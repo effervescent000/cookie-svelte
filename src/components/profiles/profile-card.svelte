@@ -2,7 +2,7 @@
 	// IMPORTS
 	import { activeProfileId } from '../../stores';
 
-	import type { IProfile } from '../../interfaces';
+	import type { IProfile } from '../../typing/interfaces';
 
 	import { properCase } from '../../utils/generic-utils';
 

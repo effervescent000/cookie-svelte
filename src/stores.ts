@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import type { IProfile } from './interfaces';
+import type { IProfile } from './typing/interfaces';
 
 export const gen = writable(0);
 export const versionGroup = writable('');
