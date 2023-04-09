@@ -48,10 +48,11 @@ class PokeAPIService {
 			const url = endpoint.includes('https') ? endpoint : `${ROOT_URL}/${endpoint}`;
 			const response = await fetch(url);
 			const json = await response.json();
-			if (!json.result) {
+			if (!json.results) {
 				tryCacheResult(cache, json);
+				return json;
 			}
-			return json;
+			return json.results;
 		} catch (error) {
 			console.log('error making get request, ', error);
 			return undefined;
@@ -59,4 +60,4 @@ class PokeAPIService {
 	}
 }
 
-export default new PokeAPIService();
+export default PokeAPIService;

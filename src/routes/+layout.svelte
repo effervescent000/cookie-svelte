@@ -11,6 +11,10 @@
 	import ProfileWrapper from '../components/profiles/profile-wrapper.svelte';
 	import { getActiveProfile } from '../utils/profile-utils';
 
+	// PROPS
+
+	export let data;
+
 	// SOME USEFUL CONSTANTS
 
 	const ACTIVE_PROFILE_ID = 'activeProfileId';
