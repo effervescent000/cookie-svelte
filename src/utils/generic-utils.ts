@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export const makeLookup = <T extends Record<string, any>, K extends keyof T>(
 	list: T[],
 	key: K,
