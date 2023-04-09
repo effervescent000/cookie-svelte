@@ -3,12 +3,13 @@
 
 	import { onDestroy, onMount } from 'svelte';
 
-	import { activeProfileId, profileIdCounter, profiles } from '../stores';
+	import { activeProfileId, gen, profileIdCounter, profiles, versionGroup } from '../stores';
 
 	import '../app.css';
 
 	import GenPickerWrapper from '../components/gen-picker/gen-picker-wrapper.svelte';
 	import ProfileWrapper from '../components/profiles/profile-wrapper.svelte';
+	import { getActiveProfile } from '../utils/profile-utils';
 
 	// SOME USEFUL CONSTANTS
 
@@ -28,9 +29,13 @@
 
 			unsubscribeFuncs.push(
 				...[
-					activeProfileId.subscribe((newVal) =>
-						localStorage.setItem(ACTIVE_PROFILE_ID, newVal.toString())
-					),
+					activeProfileId.subscribe((newVal) => {
+						if (getActiveProfile()) {
+							gen.set($profiles[$activeProfileId].values.gen);
+							versionGroup.set($profiles[$activeProfileId].values.versionGroup);
+							localStorage.setItem(ACTIVE_PROFILE_ID, newVal.toString());
+						}
+					}),
 					profileIdCounter.subscribe((newVal) =>
 						localStorage.setItem(PROFILE_ID_COUNTER, newVal.toString())
 					),
