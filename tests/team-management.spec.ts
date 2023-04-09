@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-import { LocalStoragePage } from '../test-utils/local-storage-page';
+import { LocalStoragePage } from '../test-utils/local-storage-page.js';
 
 test.describe('tests re: managing teams', () => {
 	test.beforeEach(async ({ page }) => {
