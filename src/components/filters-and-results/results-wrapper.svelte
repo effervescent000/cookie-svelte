@@ -1,0 +1,42 @@
+<script lang="ts">
+	import { onMount } from 'svelte';
+	import type { IPokemonFull, IResourceListItem } from '../../typing/interfaces';
+	import MiniCard from './mini-card.svelte';
+
+	// PROPS
+	export let allPokemon: (IResourceListItem | IPokemonFull)[];
+
+	// STATE
+	let windowSize: number;
+
+	// LOGIC
+
+	const handleWindowResize = () => {
+		windowSize = window.innerWidth;
+	};
+
+	onMount(() => {
+		if (typeof window !== 'undefined') {
+			handleWindowResize();
+
+			window.addEventListener('resize', handleWindowResize);
+		}
+
+		return () => {
+			window.removeEventListener('resize', handleWindowResize);
+		};
+	});
+
+	const getGridSize = () => {
+		if (windowSize <= 1080) {
+			return 'grid-cols-5';
+		}
+		return allPokemon.length > 20 ? 'grid-cols-8' : 'grid-cols-5';
+	};
+</script>
+
+<div class={`grid gap-x-10 ${getGridSize()}`}>
+	{#each allPokemon as pokemon}
+		<MiniCard {pokemon} />
+	{/each}
+</div>
