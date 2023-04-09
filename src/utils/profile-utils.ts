@@ -1,14 +1,17 @@
 import { get } from 'svelte/store';
 
-import { profiles, activeProfileId } from '../stores';
+import { profiles, activeProfileId as activeProfileIdStore } from '../stores';
 
 export const updateActiveProfile = <Type>(key: string, value: Type) => {
-	const activeProfileIdValue = get(activeProfileId);
-	const activeProfile = get(profiles)[activeProfileIdValue];
+	const { activeProfileId, activeProfile } = getActiveProfile();
 	profiles.update((existingProfiles) => ({
 		...existingProfiles,
-		[activeProfileIdValue]: { ...activeProfile, values: { ...activeProfile.values, [key]: value } }
+		[activeProfileId]: { ...activeProfile, values: { ...activeProfile.values, [key]: value } }
 	}));
 };
 
-export const getActiveProfile = () => get(profiles)[get(activeProfileId)];
+export const getActiveProfile = () => {
+	const activeProfileId = get(activeProfileIdStore);
+	const activeProfile = get(profiles)[activeProfileId];
+	return { activeProfileId, activeProfile };
+};
