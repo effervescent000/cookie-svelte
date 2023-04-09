@@ -77,14 +77,14 @@ jobs:
 
       - name: ⚡ Run vitest
         run: npm run test:unit
-    
+
   playwright:
     name: 🎭 Playwright
     runs-on: ubuntu-latest
     steps:
       - name: 🛑 Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.11.0
-      
+
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
@@ -93,6 +93,6 @@ jobs:
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
-        
+
       - name: Run Playwright tests
         run: npx playwright test
