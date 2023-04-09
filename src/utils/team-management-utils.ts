@@ -3,14 +3,11 @@ import _ from 'lodash';
 import type { IPokemonFull, IPokemonSkeleton, IResourceListItem } from '../typing/interfaces';
 
 import { getActiveProfile, updateActiveProfile } from './profile-utils';
+import { BENCH, TEAM } from '../constants/location-constants';
 
-const TEAM = 'team';
-const BENCH = 'bench';
-
-const mergeInto = (location: string, target: IPokemonSkeleton) => {
+const mergeInto = (location: 'team' | 'bench', target: IPokemonSkeleton) => {
 	const { activeProfile } = getActiveProfile();
-	const roster =
-		location === TEAM ? [...activeProfile.values.team] : [...activeProfile.values.bench];
+	const roster = activeProfile.values[location];
 	const foundIndex = roster.findIndex((rosterPoke) => rosterPoke.id === target.id);
 	if (foundIndex !== -1) {
 		roster[foundIndex] = target;
@@ -20,10 +17,9 @@ const mergeInto = (location: string, target: IPokemonSkeleton) => {
 	updateActiveProfile(location, roster);
 };
 
-const removeFrom = (location: string, target: IPokemonSkeleton) => {
+const removeFrom = (location: 'team' | 'bench', target: IPokemonSkeleton) => {
 	const { activeProfile } = getActiveProfile();
-	const roster =
-		location === TEAM ? [...activeProfile.values.team] : [...activeProfile.values.bench];
+	const roster = activeProfile.values[location];
 	_.remove(roster, (rosterPoke) => rosterPoke.id === target.id);
 	updateActiveProfile(location, roster);
 };

@@ -2,19 +2,14 @@
 	import { profiles, activeProfileId } from '../../stores';
 
 	import { properCase } from '../../utils/generic-utils';
-	import { TEAM } from '../../constants/location-constants';
 
 	import PokemonCard from './pokemon-card.svelte';
 
 	// PROPS
 
-	export let location: string;
+	export let location: 'team' | 'bench';
 
-	// STATE
-	$: roster =
-		location === TEAM
-			? $profiles[$activeProfileId]?.values?.team || []
-			: $profiles[$activeProfileId]?.values?.bench || [];
+	$: roster = $profiles[$activeProfileId]?.values[location] || [];
 </script>
 
 <div data-testid={`frame-${location}`}>
