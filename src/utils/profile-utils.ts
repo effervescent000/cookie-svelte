@@ -7,7 +7,7 @@ export const updateActiveProfile = <Type>(key: string, value: Type) => {
 	const activeProfile = get(profiles)[activeProfileIdValue];
 	profiles.update((existingProfiles) => ({
 		...existingProfiles,
-		[activeProfileIdValue]: { ...activeProfile, [key]: value }
+		[activeProfileIdValue]: { ...activeProfile, values: { ...activeProfile.values, [key]: value } }
 	}));
 };
 

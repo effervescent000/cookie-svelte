@@ -27,13 +27,19 @@
 			profileIdCounter.set(+(localStorage.getItem(PROFILE_ID_COUNTER) || 0));
 			profiles.set(JSON.parse(localStorage.getItem(PROFILES) || '{}'));
 
+			const activeProfile = getActiveProfile();
+			if (activeProfile) {
+				gen.set(activeProfile.values.gen);
+				versionGroup.set(activeProfile.values.versionGroup);
+			}
+
 			unsubscribeFuncs.push(
 				...[
 					activeProfileId.subscribe((newVal) => {
-						if (getActiveProfile()) {
-							gen.set($profiles[$activeProfileId].values.gen);
+						localStorage.setItem(ACTIVE_PROFILE_ID, newVal.toString());
+						if (activeProfile) {
+							gen.set(activeProfile.values.gen);
 							versionGroup.set($profiles[$activeProfileId].values.versionGroup);
-							localStorage.setItem(ACTIVE_PROFILE_ID, newVal.toString());
 						}
 					}),
 					profileIdCounter.subscribe((newVal) =>
