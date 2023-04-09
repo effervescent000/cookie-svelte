@@ -35,7 +35,7 @@
 			profileIdCounter.set(+(localStorage.getItem(PROFILE_ID_COUNTER) || 0));
 			profiles.set(JSON.parse(localStorage.getItem(PROFILES) || '{}'));
 
-			const activeProfile = getActiveProfile();
+			const { activeProfile } = getActiveProfile();
 			if (activeProfile) {
 				gen.set(activeProfile.values.gen);
 				versionGroup.set(activeProfile.values.versionGroup);

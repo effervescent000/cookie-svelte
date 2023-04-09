@@ -1,6 +1,5 @@
 import { expect, test } from '@playwright/test';
 
-// import { mergeStateIntoContext } from '../test-utils/utils.js';
 import { LocalStoragePage } from '../test-utils/local-storage-page.js';
 
 const SELECTED_CLASS = /border-dark-blue/;
