@@ -1,19 +1,23 @@
 <script lang="ts">
 	// IMPORTS
 
+	import '../app.css';
+
 	import { onDestroy, onMount } from 'svelte';
+
+	import type { IPokemonFull, IResourceListItem } from '../typing/interfaces';
 
 	import { activeProfileId, gen, profileIdCounter, profiles, versionGroup } from '../stores';
 
-	import '../app.css';
+	import { getActiveProfile } from '../utils/profile-utils';
 
 	import GenPickerWrapper from '../components/gen-picker/gen-picker-wrapper.svelte';
 	import ProfileWrapper from '../components/profiles/profile-wrapper.svelte';
-	import { getActiveProfile } from '../utils/profile-utils';
+	import ResultsWrapper from '../components/filters-and-results/results-wrapper.svelte';
 
 	// PROPS
 
-	// export let data;
+	export let data: { data: (IPokemonFull | IResourceListItem)[] };
 
 	// SOME USEFUL CONSTANTS
 
@@ -64,3 +68,5 @@
 <ProfileWrapper />
 
 <slot />
+
+<ResultsWrapper allPokemon={data.data} />

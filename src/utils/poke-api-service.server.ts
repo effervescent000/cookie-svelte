@@ -1,13 +1,22 @@
-import type { IMoveFull, IPokemonFull, ITypeFull } from '../typing/interfaces';
+import sortArray from 'sort-array';
+
+import type { IMoveFull, IPokemonFull, IResourceListItem, ITypeFull } from '../typing/interfaces';
 import type { ResponseUnionType } from '../typing/types';
 
 const pokemonCache: { [name: string]: IPokemonFull } = {};
 const moveCache: { [name: string]: IMoveFull } = {};
 const typeCache: { [name: string]: ITypeFull } = {};
 
-type CacheObject = typeof pokemonCache | typeof moveCache | typeof typeCache;
+type TCacheObject = typeof pokemonCache | typeof moveCache | typeof typeCache;
 
 const ROOT_URL = 'https://pokeapi.co/api/v2';
+
+const mergeFullIntoResourceList = (cache: TCacheObject | undefined, list: IResourceListItem[]) => {
+	if (!cache) return list;
+	const mergedList = list.map((mini) => cache[mini.name] || mini);
+	sortArray(mergedList, { by: 'name' });
+	return mergedList;
+};
 
 const getCacheFromEndpoint = (endpoint: string) => {
 	const foundEndpoint = endpoint.match(/pokemon|move|type/);
@@ -25,7 +34,7 @@ const getCacheFromEndpoint = (endpoint: string) => {
 	}
 };
 
-const tryCacheResult = (cache: CacheObject | undefined, resultToCache: ResponseUnionType) => {
+const tryCacheResult = (cache: TCacheObject | undefined, resultToCache: ResponseUnionType) => {
 	if (cache) {
 		cache[resultToCache.name] = resultToCache;
 	}
@@ -57,6 +66,18 @@ class PokeAPIService {
 			console.log('error making get request, ', error);
 			return undefined;
 		}
+	}
+
+	async getAllPokemon() {
+		const response = await this.makeGetRequest('/pokemon/?limit=2000');
+		const filteredResponse = response.filter(
+			(poke: IResourceListItem) => !poke.name.match(/-mega/) && !poke.name.match(/-gmax/)
+		);
+		const mergedResult = mergeFullIntoResourceList(pokemonCache, filteredResponse) as (
+			| IResourceListItem
+			| IPokemonFull
+		)[];
+		return mergedResult;
 	}
 }
 
