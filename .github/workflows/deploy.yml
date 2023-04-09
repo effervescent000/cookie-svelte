@@ -79,7 +79,7 @@ jobs:
         run: npm run test:unit
     
   playwright:
-    name: Playwright
+    name: 🎭 Playwright
     runs-on: ubuntu-latest
     steps:
       - name: 🛑 Cancel Previous Runs
