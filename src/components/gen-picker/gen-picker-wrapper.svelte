@@ -1,16 +1,22 @@
 <script lang="ts">
+	// IMPORTS
 	import { gen, versionGroup } from '../../stores';
 
 	import { VERSIONS } from '../../constants/version-constants';
 
 	import GenHeader from './gen-header.svelte';
+	import { updateActiveProfile } from '../../utils/profile-utils';
+
+	// LOGIC
 
 	$: foundGen = VERSIONS.find(({ value }) => $gen === value);
 	const setSelectedVersion = (value: number | string) => {
 		if (typeof value === 'number') {
 			gen.set(value);
+			updateActiveProfile('gen', $gen);
 		} else {
 			versionGroup.set(value);
+			updateActiveProfile('versionGroup', $versionGroup);
 		}
 	};
 </script>

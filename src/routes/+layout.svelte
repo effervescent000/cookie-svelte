@@ -3,12 +3,13 @@
 
 	import { onDestroy, onMount } from 'svelte';
 
-	import { activeProfileId, profileIdCounter, profiles } from '../stores';
+	import { activeProfileId, gen, profileIdCounter, profiles, versionGroup } from '../stores';
 
 	import '../app.css';
 
 	import GenPickerWrapper from '../components/gen-picker/gen-picker-wrapper.svelte';
 	import ProfileWrapper from '../components/profiles/profile-wrapper.svelte';
+	import { getActiveProfile } from '../utils/profile-utils';
 
 	// SOME USEFUL CONSTANTS
 
@@ -26,11 +27,21 @@
 			profileIdCounter.set(+(localStorage.getItem(PROFILE_ID_COUNTER) || 0));
 			profiles.set(JSON.parse(localStorage.getItem(PROFILES) || '{}'));
 
+			const activeProfile = getActiveProfile();
+			if (activeProfile) {
+				gen.set(activeProfile.values.gen);
+				versionGroup.set(activeProfile.values.versionGroup);
+			}
+
 			unsubscribeFuncs.push(
 				...[
-					activeProfileId.subscribe((newVal) =>
-						localStorage.setItem(ACTIVE_PROFILE_ID, newVal.toString())
-					),
+					activeProfileId.subscribe((newVal) => {
+						localStorage.setItem(ACTIVE_PROFILE_ID, newVal.toString());
+						if (activeProfile) {
+							gen.set(activeProfile.values.gen);
+							versionGroup.set($profiles[$activeProfileId].values.versionGroup);
+						}
+					}),
 					profileIdCounter.subscribe((newVal) =>
 						localStorage.setItem(PROFILE_ID_COUNTER, newVal.toString())
 					),
