@@ -1,5 +1,5 @@
-import type { IMoveFull, IPokemonFull, ITypeFull } from '../interfaces';
-import type { ResponseUnionType } from '../types';
+import type { IMoveFull, IPokemonFull, ITypeFull } from '../typing/interfaces';
+import type { ResponseUnionType } from '../typing/types';
 
 const pokemonCache: { [name: string]: IPokemonFull } = {};
 const moveCache: { [name: string]: IMoveFull } = {};

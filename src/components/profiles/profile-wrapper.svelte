@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { IProfile } from '../../interfaces';
+	import type { IProfile } from '../../typing/interfaces';
 
 	// IMPORTS
 	import { profileIdCounter, profiles, activeProfileId } from '../../stores';

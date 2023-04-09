@@ -13,7 +13,7 @@
 
 	// PROPS
 
-	export let data;
+	// export let data;
 
 	// SOME USEFUL CONSTANTS
 
