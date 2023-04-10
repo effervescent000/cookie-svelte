@@ -1,8 +1,8 @@
 <script lang="ts">
 	// PROPS
 	export let value: string;
-	export let label: string = '';
-	export let testid: string = '';
+	export let label = '';
+	export let testid = '';
 	// export let onChange: (event: Event & { currentTarget: HTMLInputElement }) => void;
 	export let callback: (value: string) => void;
 </script>
