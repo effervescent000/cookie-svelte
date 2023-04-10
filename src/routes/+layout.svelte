@@ -14,6 +14,7 @@
 	import GenPickerWrapper from '../components/gen-picker/gen-picker-wrapper.svelte';
 	import ProfileWrapper from '../components/profiles/profile-wrapper.svelte';
 	import ResultsWrapper from '../components/filters-and-results/results-wrapper.svelte';
+	import FiltersAndResultsWrapper from '../components/filters-and-results/filters-and-results-wrapper.svelte';
 
 	// PROPS
 
@@ -69,4 +70,4 @@
 
 <slot />
 
-<ResultsWrapper allPokemon={data.data} />
+<FiltersAndResultsWrapper allPokemon={data.data} />
