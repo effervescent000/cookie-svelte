@@ -1,6 +1,6 @@
 <script lang="ts">
 	import _ from 'lodash';
-	import { versionGroup } from '../../stores';
+	import { filters, versionGroup } from '../../stores';
 
 	import type { IPokemonFull, IResourceListItem } from '../../typing/interfaces';
 	import { isFullPokemon } from '../../typing/type-guards';
@@ -12,9 +12,6 @@
 	export let allPokemon: (IResourceListItem | IPokemonFull)[];
 
 	// STATE
-	let nameFilter = '';
-	let type1Filter = '';
-	let type2Filter = '';
 
 	let thisVersionPokemon: (IResourceListItem | IPokemonFull)[] = [];
 	let filteredPokemon: (IResourceListItem | IPokemonFull)[] = [];
@@ -36,15 +33,17 @@
 
 	$: {
 		const filterPokemon = () => {
-			const filteredByName = nameFilter
-				? thisVersionPokemon.filter((pokemon) => pokemon.name.includes(nameFilter.toLowerCase()))
+			const filteredByName = $filters.name
+				? thisVersionPokemon.filter((pokemon) => pokemon.name.includes($filters.name.toLowerCase()))
 				: thisVersionPokemon;
 			const filteredByType =
-				type1Filter || type2Filter
+				$filters.type2 || $filters.type2
 					? thisVersionPokemon.filter(
 							(pokemon) =>
 								!isFullPokemon(pokemon) ||
-								!!pokemon.types.find((type) => [type1Filter, type2Filter].includes(type.type.name))
+								!!pokemon.types.find((type) =>
+									[$filters.type1, $filters.type2].includes(type.type.name)
+								)
 					  )
 					: thisVersionPokemon;
 

@@ -1,10 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-	import { versionGroup } from '../../stores';
-
 	import type { IPokemonFull, IResourceListItem } from '../../typing/interfaces';
-	import { isFullPokemon } from '../../typing/type-guards';
 
 	import MiniCard from './mini-card.svelte';
 
