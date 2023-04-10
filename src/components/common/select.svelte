@@ -4,6 +4,7 @@
 	export let options: { value: string; name: string }[];
 	export let label: string = '';
 	export let testid: string = '';
+	export let callback: (value: string) => void;
 </script>
 
 <div>
@@ -13,9 +14,10 @@
 	<select
 		class="m-1 w-44 rounded-md border border-blue bg-gray p-1 text-sm"
 		data-testid={testid}
-		bind:value
+		{value}
+		on:input={(event) => callback(event.currentTarget.value)}
 	>
-		{#each options as option}
+		{#each [{ name: '---', value: '' }, ...options] as option}
 			<option value={option.value}>{option.name}</option>
 		{/each}
 	</select>

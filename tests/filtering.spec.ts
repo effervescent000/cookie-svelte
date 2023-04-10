@@ -25,4 +25,17 @@ test.describe('tests re: filtering and browsing pokemon', () => {
 		await page.getByTestId('name-filter').press('Backspace');
 		await expect(page.getByTestId('mini-card-abra')).toBeVisible();
 	});
+
+	test('can filter by type', async ({ page }) => {
+		const ls = new LocalStoragePage(page);
+		await ls.createLocalStorage('two-empty-profiles');
+
+		await page.getByTestId('type-1-filter').selectOption('ghost');
+		await expect(page.getByTestId('mini-card-abra')).not.toBeVisible();
+		await page.getByTestId('type-1-filter').selectOption('');
+		await expect(page.getByTestId('mini-card-abra')).toBeVisible();
+
+		await page.getByTestId('type-2-filter').selectOption('ghost');
+		await expect(page.getByTestId('mini-card-abra')).not.toBeVisible();
+	});
 });

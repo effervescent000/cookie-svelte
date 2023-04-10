@@ -37,10 +37,10 @@
 				? thisVersionPokemon.filter((pokemon) => pokemon.name.includes($filters.name.toLowerCase()))
 				: thisVersionPokemon;
 			const filteredByType =
-				$filters.type2 || $filters.type2
+				$filters.type1 || $filters.type2
 					? thisVersionPokemon.filter(
 							(pokemon) =>
-								!isFullPokemon(pokemon) ||
+								isFullPokemon(pokemon) &&
 								!!pokemon.types.find((type) =>
 									[$filters.type1, $filters.type2].includes(type.type.name)
 								)
