@@ -18,7 +18,10 @@
 				pokemonIdCounter: 0
 			}
 		};
-		profiles.update((profiles) => ({ ...profiles, [$profileIdCounter]: emptyProfile }));
+		profiles.update((profiles) => ({
+			...profiles,
+			[$profileIdCounter]: emptyProfile
+		}));
 		activeProfileId.set($profileIdCounter);
 		profileIdCounter.update((counter) => counter + 1);
 	};
@@ -28,5 +31,7 @@
 	{#each Object.entries($profiles) as [id, profile]}
 		<ProfileCard profile={{ id: +id, profile }} />
 	{/each}
-	<button on:click={addNewProfile} data-testid="new-profile-btn">New profile</button>
+	<button on:click={addNewProfile} data-testid="new-profile-btn"
+		>New profile</button
+	>
 </div>

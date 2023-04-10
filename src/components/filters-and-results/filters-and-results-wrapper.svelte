@@ -2,7 +2,10 @@
 	import _ from 'lodash';
 	import { filters, versionGroup } from '../../stores';
 
-	import type { IPokemonFull, IResourceListItem } from '../../typing/interfaces';
+	import type {
+		IPokemonFull,
+		IResourceListItem
+	} from '../../typing/interfaces';
 	import { isFullPokemon } from '../../typing/type-guards';
 
 	import FiltersWrapper from './filters-wrapper.svelte';
@@ -19,7 +22,10 @@
 	$: {
 		thisVersionPokemon = allPokemon.filter((pokemon) => {
 			if (isFullPokemon(pokemon)) {
-				const moves = pokemon.moves.slice(0, Math.max(Math.round(pokemon.moves.length * 0.2), 5));
+				const moves = pokemon.moves.slice(
+					0,
+					Math.max(Math.round(pokemon.moves.length * 0.2), 5)
+				);
 				const checkedMoves = moves.map((move) => {
 					return !!move.version_group_details.find(
 						({ version_group }) => $versionGroup === version_group.name
@@ -34,7 +40,9 @@
 	$: {
 		const filterPokemon = () => {
 			const filteredByName = $filters.name
-				? thisVersionPokemon.filter((pokemon) => pokemon.name.includes($filters.name.toLowerCase()))
+				? thisVersionPokemon.filter((pokemon) =>
+						pokemon.name.includes($filters.name.toLowerCase())
+				  )
 				: thisVersionPokemon;
 			const filteredByType =
 				$filters.type1 || $filters.type2

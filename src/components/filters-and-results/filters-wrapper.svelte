@@ -12,7 +12,10 @@
 	// STATE
 	const filtersData = $filters;
 
-	const typeOptions = getTypes($gen).map(({ key }) => ({ name: properCase(key), value: key }));
+	const typeOptions = getTypes($gen).map(({ key }) => ({
+		name: properCase(key),
+		value: key
+	}));
 </script>
 
 <div class="flex">
@@ -21,7 +24,11 @@
 		testid="name-filter"
 		value={filtersData.name}
 		callback={_.debounce(
-			(value) => filters.update((currentFilters) => ({ ...currentFilters, name: value })),
+			(value) =>
+				filters.update((currentFilters) => ({
+					...currentFilters,
+					name: value
+				})),
 			250
 		)}
 	/>
@@ -29,13 +36,15 @@
 		value={filtersData.type1}
 		label="Type"
 		testid="type-1-filter"
-		callback={(value) => filters.update((currentFilters) => ({ ...currentFilters, type1: value }))}
+		callback={(value) =>
+			filters.update((currentFilters) => ({ ...currentFilters, type1: value }))}
 		options={typeOptions}
 	/>
 	<Select
 		value={filtersData.type1}
 		testid="type-2-filter"
-		callback={(value) => filters.update((currentFilters) => ({ ...currentFilters, type2: value }))}
+		callback={(value) =>
+			filters.update((currentFilters) => ({ ...currentFilters, type2: value }))}
 		options={typeOptions}
 	/>
 </div>

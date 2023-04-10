@@ -3,7 +3,6 @@
 	export let value: string;
 	export let label = '';
 	export let testid = '';
-	// export let onChange: (event: Event & { currentTarget: HTMLInputElement }) => void;
 	export let callback: (value: string) => void;
 </script>
 

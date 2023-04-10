@@ -18,7 +18,9 @@
 
 <div data-testid={`frame-${location}`}>
 	<span>{properCase(location)}</span>
-	<div class="grid min-h-40 min-w-max grid-cols-2 gap-2 border border-light-blue">
+	<div
+		class="grid min-h-40 min-w-max grid-cols-2 gap-2 border border-light-blue"
+	>
 		{#each roster as pokemon}
 			<PokemonCard {pokemon} {location} size={EXPANDED} />
 		{/each}
