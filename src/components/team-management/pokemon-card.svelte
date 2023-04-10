@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { IPokemonFull, IPokemonSkeleton } from '../../typing/interfaces';
+	import type { IPokemonSkeleton } from '../../typing/interfaces';
 	import type { TLocationUnionType } from '../../typing/types';
 
 	import { properCase } from '../../utils/generic-utils';
