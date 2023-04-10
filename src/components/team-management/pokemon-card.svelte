@@ -1,16 +1,19 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+
 	import type { IPokemonFull, IPokemonSkeleton } from '../../typing/interfaces';
 	import type { TLocationUnionType } from '../../typing/types';
 
 	import { properCase } from '../../utils/generic-utils';
 
 	import EditIcons from '../common/edit-icons.svelte';
+	import { SMALL, type TCardSize } from '../../constants/general-constants';
 
 	// PROPS
 
 	export let pokemon: IPokemonSkeleton;
 	export let location: TLocationUnionType;
+	export let size: TCardSize = SMALL;
 
 	// STATE
 
