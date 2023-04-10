@@ -17,6 +17,7 @@
 	let type2Filter = '';
 
 	let thisVersionPokemon: (IResourceListItem | IPokemonFull)[] = [];
+	let filteredPokemon: (IResourceListItem | IPokemonFull)[] = [];
 
 	$: {
 		thisVersionPokemon = allPokemon.filter((pokemon) => {
@@ -33,22 +34,25 @@
 		});
 	}
 
-	const filterPokemon = () => {
-		const filteredByName = nameFilter
-			? thisVersionPokemon.filter((pokemon) => pokemon.name.includes(nameFilter))
-			: thisVersionPokemon;
-		const filteredByType =
-			type1Filter || type2Filter
-				? thisVersionPokemon.filter(
-						(pokemon) =>
-							!isFullPokemon(pokemon) ||
-							!!pokemon.types.find((type) => [type1Filter, type2Filter].includes(type.type.name))
-				  )
+	$: {
+		const filterPokemon = () => {
+			const filteredByName = nameFilter
+				? thisVersionPokemon.filter((pokemon) => pokemon.name.includes(nameFilter.toLowerCase()))
 				: thisVersionPokemon;
-		return _.intersection(filteredByName, filteredByType);
-	};
+			const filteredByType =
+				type1Filter || type2Filter
+					? thisVersionPokemon.filter(
+							(pokemon) =>
+								!isFullPokemon(pokemon) ||
+								!!pokemon.types.find((type) => [type1Filter, type2Filter].includes(type.type.name))
+					  )
+					: thisVersionPokemon;
 
-	$: filteredPokemon = filterPokemon();
+			const result = _.intersection(filteredByName, filteredByType);
+			return result;
+		};
+		filteredPokemon = filterPokemon();
+	}
 </script>
 
 <FiltersWrapper />
