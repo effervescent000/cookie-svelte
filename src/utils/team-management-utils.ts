@@ -17,7 +17,7 @@ const mergeInto = (location: 'team' | 'bench', target: IPokemonSkeleton) => {
 	updateActiveProfile(location, roster);
 };
 
-const removeFrom = (location: 'team' | 'bench', target: IPokemonSkeleton) => {
+export const removeFrom = (location: 'team' | 'bench', target: IPokemonSkeleton) => {
 	const { activeProfile } = getActiveProfile();
 	const roster = activeProfile.values[location];
 	_.remove(roster, (rosterPoke) => rosterPoke.id === target.id);

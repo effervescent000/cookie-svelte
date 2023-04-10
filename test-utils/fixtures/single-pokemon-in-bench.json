@@ -1,0 +1,16 @@
+{
+	"activeProfileId": 0,
+	"profiles": {
+		"0": {
+			"name": "",
+			"values": {
+				"team": [],
+				"bench": [],
+				"gen": 6,
+				"versionGroup": "x-y",
+				"pokemonIdCounter": 0
+			}
+		}
+	},
+	"profileIdCounter": 1
+}

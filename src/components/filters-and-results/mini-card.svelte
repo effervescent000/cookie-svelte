@@ -18,6 +18,7 @@
 			class="fa-solid fa-circle-up"
 			on:click={() => createNewSkeleton(pokemon)}
 			on:keypress={() => createNewSkeleton(pokemon)}
+			data-testid={`add-pokemon`}
 		/>
 	</div>
 </div>
