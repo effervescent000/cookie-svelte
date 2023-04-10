@@ -23,6 +23,8 @@
 		} border-b-2 px-2`}
 		data-testid={`profile-${profile.id}`}
 	>
-		{profile.profile.name || (profileVersion && properCase(profileVersion)) || 'Unnamed profile'}
+		{profile.profile.name ||
+			(profileVersion && properCase(profileVersion)) ||
+			'Unnamed profile'}
 	</button>
 </div>

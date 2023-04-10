@@ -26,8 +26,6 @@ test.describe('tests re: profile functionality', () => {
 	});
 
 	test('can change active profile', async ({ page }) => {
-		// const ls = new LocalStoragePage(page);
-		// await ls.createLocalStorage('two-empty-profiles');
 		await page.getByTestId('new-profile-btn').click();
 		await page.waitForTimeout(50);
 		await page.getByTestId('new-profile-btn').click();
@@ -55,6 +53,8 @@ test.describe('tests re: profile functionality', () => {
 		await page.getByRole('button', { name: 'X/Y' }).click();
 		await page.reload();
 		await expect(page.getByRole('button', { name: 'X/Y' })).toBeVisible();
-		await expect(page.getByRole('button', { name: 'X/Y' })).toHaveClass(/underline/);
+		await expect(page.getByRole('button', { name: 'X/Y' })).toHaveClass(
+			/underline/
+		);
 	});
 });

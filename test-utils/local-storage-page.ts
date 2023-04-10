@@ -12,7 +12,9 @@ export class LocalStoragePage {
 	async createLocalStorage(file: string) {
 		try {
 			const fixtureData = JSON.parse(
-				readFileSync(`./test-utils/fixtures/${file}.json`, { encoding: 'utf-8' })
+				readFileSync(`./test-utils/fixtures/${file}.json`, {
+					encoding: 'utf-8'
+				})
 			);
 			await this.page.evaluate((data) => {
 				Object.entries(data).forEach(([key, value]) => {

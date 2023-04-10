@@ -7,7 +7,13 @@
 
 	import type { IPokemonFull, IResourceListItem } from '../typing/interfaces';
 
-	import { activeProfileId, gen, profileIdCounter, profiles, versionGroup } from '../stores';
+	import {
+		activeProfileId,
+		gen,
+		profileIdCounter,
+		profiles,
+		versionGroup
+	} from '../stores';
 
 	import { getActiveProfile } from '../utils/profile-utils';
 
@@ -53,7 +59,9 @@
 					profileIdCounter.subscribe((newVal) =>
 						localStorage.setItem(PROFILE_ID_COUNTER, newVal.toString())
 					),
-					profiles.subscribe((newVal) => localStorage.setItem(PROFILES, JSON.stringify(newVal)))
+					profiles.subscribe((newVal) =>
+						localStorage.setItem(PROFILES, JSON.stringify(newVal))
+					)
 				]
 			);
 		}

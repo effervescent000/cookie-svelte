@@ -3,7 +3,11 @@
 
 	import { BENCH, TEAM } from '../../constants/location-constants';
 	import type { IPokemonSkeleton } from '../../typing/interfaces';
-	import { mergeIntoBench, mergeIntoTeam, removeFrom } from '../../utils/team-management-utils';
+	import {
+		mergeIntoBench,
+		mergeIntoTeam,
+		removeFrom
+	} from '../../utils/team-management-utils';
 
 	// PROPS
 
@@ -14,7 +18,9 @@
 	let icons = [{ icon: 'fa-expand', callback: () => {}, testid: 'focus' }];
 
 	$: {
-		const newIcons = [{ icon: 'fa-expand', callback: () => {}, testid: 'focus' }];
+		const newIcons = [
+			{ icon: 'fa-expand', callback: () => {}, testid: 'focus' }
+		];
 		if (location) {
 			newIcons.push({
 				icon: 'fa-trash',

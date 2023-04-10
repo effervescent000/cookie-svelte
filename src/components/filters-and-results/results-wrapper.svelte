@@ -1,7 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-	import type { IPokemonFull, IResourceListItem } from '../../typing/interfaces';
+	import type {
+		IPokemonFull,
+		IResourceListItem
+	} from '../../typing/interfaces';
 
 	import MiniCard from './mini-card.svelte';
 

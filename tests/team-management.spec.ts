@@ -34,6 +34,8 @@ test.describe('tests re: managing teams', () => {
 			.getByTestId('poke-card-abra')
 			.getByTestId('bench-to-team')
 			.click();
-		await expect(page.getByTestId('frame-team').getByTestId('poke-card-abra')).toBeVisible();
+		await expect(
+			page.getByTestId('frame-team').getByTestId('poke-card-abra')
+		).toBeVisible();
 	});
 });
