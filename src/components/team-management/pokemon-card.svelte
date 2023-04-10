@@ -8,6 +8,7 @@
 
 	import EditIcons from '../common/edit-icons.svelte';
 	import { SMALL, type TCardSize } from '../../constants/general-constants';
+	import Sprites from '../common/sprites.svelte';
 
 	// PROPS
 
@@ -36,7 +37,7 @@
 			{properCase(pokemon.name)}
 		</span>
 		<div>
-			<!-- sprites and scoring info goes here -->
+			<Sprites pokemon={fullPokemon} {size} />
 			<EditIcons {location} {pokemon} />
 		</div>
 	</div>
