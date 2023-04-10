@@ -1,8 +1,10 @@
 <script lang="ts">
-	import type { IPokemonSkeleton } from '../../typing/interfaces';
+	import { onMount } from 'svelte';
+	import type { IPokemonFull, IPokemonSkeleton } from '../../typing/interfaces';
 	import type { TLocationUnionType } from '../../typing/types';
 
 	import { properCase } from '../../utils/generic-utils';
+
 	import EditIcons from '../common/edit-icons.svelte';
 
 	// PROPS
@@ -12,7 +14,17 @@
 
 	// STATE
 
-	// let fullPokemon: IPokemonFull;
+	let fullPokemon: IPokemonFull;
+
+	onMount(async () => {
+		const fetchPokemon = async <T>() => {
+			const result = await fetch(`/data/pokemon/${pokemon.name}`);
+			const json: T = await result.json();
+			return json;
+		};
+
+		fullPokemon = (await fetchPokemon<{ data: IPokemonFull }>()).data;
+	});
 </script>
 
 <div class="flex" data-testid={`poke-card-${pokemon.name}`}>
